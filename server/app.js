@@ -1,8 +1,12 @@
 const express = require('express')
 const app = express()
 const cors = require('cors');
+const cookieParser = require("cookie-parser");
+const path = require('path')
+
 
 const userRoute = require('./routes/userRoute')
+const staticRouter = require('./routes/staticRouter')
 // const contactRoute = require('./routes/contactRoute')
 // const productRoute = require('./routes/productRoute')
 // const categoryRoute = require('./routes/categoryRoute')
@@ -15,9 +19,13 @@ const userRoute = require('./routes/userRoute')
 
 
 //------------------------------------------
+app.use(cookieParser());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json()) // parse the data that we receive form client side to server side.
-
-app.use(cors())
+app.use(express.urlencoded({ extended: false }));
+app.set('view engine', "ejs") // ejs is used for server side rendering.
+app.set('views', path.resolve('./views'))
+app.use("/", staticRouter)
 // app.use('/images', express.static(path.join(__dirname, "uploads")));
 // app.use('/aggregate', AggregationDBRoute)
 // app.use('/contact', contactRoute)

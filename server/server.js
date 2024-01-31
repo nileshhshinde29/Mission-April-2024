@@ -4,6 +4,7 @@ const app = require('./app')
 const errorHandler = require('./middleware/errorHandler')
 const connectDb = require('./config/dbConnection')
 
+
 connectDb()
 
 const server = http.createServer(app)
