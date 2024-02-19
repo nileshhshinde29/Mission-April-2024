@@ -3,6 +3,11 @@ const User = require('../model/userModel')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { response } = require('../app');
+const axios = require('axios');
+const fs = require('fs')
+const { parse } = require('json2csv');
+const PDFDocument = require('pdfkit');
+
 
 const register = async (req, res) => {
 
@@ -60,8 +65,8 @@ const login = async (req, res) => {
                 httpOnly: true,
             });
 
-            // return res.status(200).json(accessToken)
-            return res.render('Home', { accessToken: accessToken })
+            return res.status(200).json(accessToken)
+            // return res.render('Home', { accessToken: accessToken }) // this is for ejs
         }
     } catch (error) {
         return res.status(500).json({ 'server error': error })
@@ -72,9 +77,41 @@ const temp = async (req, res) => {
     res.send('hello');
 };
 
+const fetchDataAndSaveAsCSV = async (req, res) => {
+
+    const response = await axios.get('http://localhost:8080/moment/get-moments');
+    try {
+        const data = response.data;
+
+        const csv = parse(data);
+
+        res.header('Content-Type', 'text/csv');
+        res.attachment('filename.csv');
+
+        res.send(csv);
+
+        // const doc = new PDFDocument();
+
+        // // Pipe the PDF into a blob or file on the server
+        // res.setHeader('Content-Type', 'application/pdf');
+        // res.setHeader('Content-Disposition', 'attachment; filename=download.pdf');
+
+        // // Send the document data to the response
+        // doc.pipe(res);
+
+        // // Add some content to the PDF
+        // doc.fontSize(10).text(JSON.stringify(data), 100, 80);
+
+        // // Finalize PDF file
+        // doc.end();
+
+    } catch (error) {
+        return res.status(500).json({ 'server error': error })
+    }
+}
 
 const self = asyncHandler(async (req, res) => {
     res.send(req.user);
 });
 
-module.exports = { register, login, self, temp }
+module.exports = { register, login, self, temp, fetchDataAndSaveAsCSV }

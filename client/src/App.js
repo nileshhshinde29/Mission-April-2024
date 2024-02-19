@@ -52,6 +52,7 @@ function App() {
             <Route path="/register" element={<AuthRoute><Register /></AuthRoute>} />
             <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
             <Route path="/add-moment" element={<PrivateRoute><AddMoment /></PrivateRoute>} />
+            <Route path="/edit-moment/:id" element={<PrivateRoute><AddMoment /></PrivateRoute>} />
             <Route path="/glimpse-of-past" element={<PrivateRoute><GlimpseOfPast /></PrivateRoute>} />
           </Routes>
         </AuthProvider>

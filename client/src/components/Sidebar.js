@@ -115,7 +115,7 @@ export default function Sidebar({ children }) {
             path: '/glimpse-of-past'
         },
         {
-            name: "Starred",
+            name: "favorite",
             path: '/favorite'
         },
     ]

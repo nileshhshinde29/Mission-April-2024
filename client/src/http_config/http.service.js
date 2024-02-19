@@ -10,7 +10,7 @@ export async function fetchData(endpoint, method = 'GET', body = null) {
         options.data = body;
     }
     const response = await axiosInstance(endpoint, options);
-    const data = response.data;
+    const data = response;
 
     return data;
 }

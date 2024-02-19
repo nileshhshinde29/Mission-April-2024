@@ -15,8 +15,6 @@ const getProducts = async (req, res) => {
 }
 
 const createProduct = async (req, res) => {
-    console.log(req.body)
-
     try {
         let images = [];
 

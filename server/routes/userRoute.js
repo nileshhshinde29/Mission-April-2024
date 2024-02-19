@@ -1,5 +1,5 @@
 const express = require('express')
-const { register, login, temp } = require('../controller/userController')
+const { register, login, temp, fetchDataAndSaveAsCSV } = require('../controller/userController')
 const { refreshToken, auth } = require('../middleware/auth')
 const router = express.Router()
 
@@ -7,7 +7,7 @@ const router = express.Router()
 router.route('/register').post(register)
 router.post('/login', login)
 router.post('/refresh', refreshToken)
-router.get('/temp', auth, temp)
+router.get('/temp', fetchDataAndSaveAsCSV)
 
 
 module.exports = router

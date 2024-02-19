@@ -37,6 +37,7 @@ async function login(data) {
     await post('/user/login', data)
         .then(response => {
             // Cookie.set('_token', response.token, { path: '/' })
+            console.log(response);
             localStorage.setItem('AuthenticationToken', JSON.stringify(response))
 
             currentUserSubject.next(response)

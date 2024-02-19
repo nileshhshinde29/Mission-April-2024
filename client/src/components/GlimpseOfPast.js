@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getMoments } from '../services/moments.services'
+import { useNavigate } from 'react-router-dom'
 
 function GlimpseOfPast() {
+
+    const [data, setData] = useState([])
+    const navigate = useNavigate()
+
+    const getAllData = () => {
+
+        getMoments().then((res) => setData(res.data))
+            .catch((e) => console.log(e))
+
+
+    }
+
+    useEffect(() => {
+        getAllData()
+    }, [])
+
+
+
     return (
-        <div><div class="sticky-top">
-            <div>qqqqq</div>
-            <div>qqqqq</div>
-            <div>qqqqq</div>
-            <div>qqqqq</div>
-            <div>qqqqq</div>
-        </div>
+        <div >
             <div className="container">
                 <div className='row'>
                     {
-                        Array(18).fill().map((item, index) => (
+                        data.map((item, index) => (
                             <div key={index} className="col-4 mb-3">
                                 <div className="card">
-                                    <div className="card-header">Header</div>
+                                    <div className="card-header">{item.title}  <button className="" onClick={() => navigate('/add')}>edit</button></div>
                                     <div className="card-body">
-                                        <h5 className="card-title">Primary card title</h5>
-                                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 className="card-title">{item.description}</h5>
+                                        <p className="card-text">{item.content}</p>
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +40,7 @@ function GlimpseOfPast() {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

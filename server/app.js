@@ -7,13 +7,17 @@ const path = require('path')
 
 const userRoute = require('./routes/userRoute')
 const staticRouter = require('./routes/staticRouter')
+const momentRouter = require('./routes/momentRoute')
+const uploadRouter = require('./routes/uploadRoute')
+
 // const contactRoute = require('./routes/contactRoute')
 // const productRoute = require('./routes/productRoute')
 // const categoryRoute = require('./routes/categoryRoute')
 // const sendMail = require('./middleware/mailSender')
 // const profileRoute = require('./routes/profileRoute')
 // const AggregationDBRoute = require('./routes/aggregationRoute')
-// const queriesRoute = require('./routes/quriesRoute')
+const queriesRoute = require('./routes/quriesRoute')
+const aggregationRoute = require('./routes/AggregationQuestionPracticeRoute')
 // const path = require('path')
 
 
@@ -33,8 +37,14 @@ app.use('/user', userRoute)
 // app.use('/product', productRoute)
 // app.use('/category', categoryRoute)
 // app.use('/profile', profileRoute)
-// app.use('/queries', queriesRoute)
+app.use('/queries', queriesRoute)
 // app.get('/send-email', sendMail) // ethereal mail sender
+
+app.use('/moment', momentRouter)
+app.use('/aggregation', aggregationRoute)
+app.use('/upload', uploadRouter)
+app.use('/PDFfiles', express.static('PDFfiles')) //we can access pdf file from anywhere by this http://localhost:8080/PDFfiles/1708066994298.pdf
+
 
 
 
