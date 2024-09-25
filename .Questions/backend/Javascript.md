@@ -10,6 +10,12 @@ todo : docker, pdf save using multer, pdf download using handlebar.
 9.Difference between get and post.
 8.what is process?
 9.what are threads / worker threads?
+10.Caching in node js
+11 Authentication and authorization difference
+12 Lookups
+13 How Mongodb creates ObjectID
+14 shallow and deep copy
+15 private routes
 
 
 Event loop and concurrency in nodejs

@@ -50,7 +50,7 @@ app.use('/PDFfiles', express.static('PDFfiles')) //we can access pdf file from a
 
 app.use((req, res, next) => {
     res.status(404).json({
-        message: 'Default running'
+        message: 'Default running' 
     })
 })
 
